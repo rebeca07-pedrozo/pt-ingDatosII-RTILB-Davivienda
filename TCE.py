@@ -1,21 +1,22 @@
-#primero
+#Primero - Librerias 
 import pandas as pd
 import numpy as np
 import difflib
+from IPython.display import display
 
 
-#segundo 
+#segundo - Carga de datos
 from google.colab import files
 uploaded = files.upload()                
 NOMBRE_ARCHIVO = next(iter(uploaded))
 
-#Tercero
+#Tercero - Definicion de los parametros de negocio dinamicos y definicion de la trazabilidad de los cambios que se van a realizar en la base de datos
 df_raw = pd.read_csv(NOMBRE_ARCHIVO, sep=None, engine='python', dtype=str)
 df_raw.columns = [c.strip().upper() for c in df_raw.columns]
 print("Filas cargadas:", df_raw.shape[0])
 df_raw.head()
 
-#Cuarto
+#Cuarto - Desarrollo de funciones de estandarizacion reusables y log de cambios
 TASA_USURA           = 0.2817         
 FECHA_CORTE_ESPERADA = '2026-05-31'
 
@@ -44,10 +45,11 @@ def registrar_depuracion(df_invalido, regla, razon):
             'REGLA': regla, 'RAZON': razon}))
         
 
-#Quinto
+#Quinto - Aplicaciones de las reglas de los datos y log de cambios  
 def estandarizar_fecha(serie):
-    """Estandarizamos las fechas de cualquier formato ej; texto, DD-MMM-YY, '23 October 2025', etc a formato datetime."""
-    return pd.to_datetime(serie.astype(str).str.strip(), errors='coerce', dayfirst=False)
+    """format='mixed' parsea cada celda por separado (evita que '23 October 2025' se vuelva NaT)."""
+    return pd.to_datetime(serie.astype(str).str.strip(),
+                          errors='coerce', format='mixed', dayfirst=False)
 
 def estandarizar_tasa(serie):
     """Quitamos el %, texto y se deja la tasa en decimal, como por ejemplo (12.74% -> 0.1274 ; 0.24 -> 0.24)."""
@@ -76,7 +78,7 @@ def estandarizar_numerico(serie):
                          errors='coerce')
 
 
-#sexto
+#Sexto - Aplicacion de las funciones de estandarizacion y log de cambios, aplicacion de las reglas de negocio
 df = df_raw.copy()
 
 dups = df[df.duplicated(keep='first')]
@@ -118,7 +120,12 @@ for col in ['MONTO_DESEMBOLSADO', 'SALDO_MO_CAPITALIZABLE']:
     registrar_modificacion(df['NRO_OPERACION'], col, antes, df[col].astype('string'), 'Conversión a numérico')
 
 
-#Septimo 
+#Septimo - Aplicacion de las reglas de negocio y log de cambios
+ 
+mask_nat = df[['FECHA_CORTE','FECHA_DESEMBOLSO','FECHA_VENCIMIENTO']].isna().any(axis=1)
+df = aplicar_regla_negocio(df, mask_nat, 'Consistencia fechas',
+        'Fecha no parseable / inconsistente (NaT)')
+
 def aplicar_regla_negocio(df, mask_invalida, regla, razon):
     registrar_depuracion(df[mask_invalida], regla, razon)
     return df[~mask_invalida].copy()
@@ -149,7 +156,7 @@ df = aplicar_regla_negocio(df,
 df = aplicar_regla_negocio(df, df['TASA_COMPLETA'] > TASA_USURA,
         'Usura', f'TASA_COMPLETA supera la usura ({TASA_USURA:.4f})')
 
-#Octavo
+#Octavo - Enriquecimiento con los nuevos campos
 def asignar_departamento(nro_series, mapa=MAPA_DANE):
     return nro_series.astype(str).str[:2].map(mapa).fillna('NO_IDENTIFICADO')
 
@@ -165,27 +172,29 @@ df['BANDA_PLAZO_ORIGINACION'] = pd.cut(df['PLAZO_ORIGINACION'], bins=bins, label
 df['BANDA_PLAZO_REMANENTE']   = pd.cut(df['PLAZO_REMANENTE'],   bins=bins, labels=labels, right=False)
 
 
-#Noveno 
-NOMBRE = 'Rebeca_Pedrozo'   
+#Noveno - Consolidar logs, base limpia y exportar con tu nomenclatura
+
+NOMBRE = 'Rebeca_Pedrozo' 
 
 log_mod = pd.concat(log_modificaciones, ignore_index=True) if log_modificaciones \
           else pd.DataFrame(columns=['NRO_OPERACION','CAMPO','VALOR_ANTERIOR','VALOR_NUEVO','REGLA'])
 log_dep = pd.concat(log_depuraciones, ignore_index=True) if log_depuraciones \
           else pd.DataFrame(columns=['NRO_OPERACION','REGLA','RAZON'])
 
-df.to_csv(f'Punto_1_Base_Limpia_{NOMBRE}.csv', index=False)
-log_mod.to_csv(f'Punto_1_Log_Modificaciones_{NOMBRE}.csv', index=False)
-log_dep.to_csv(f'Punto_1_Log_Depuraciones_{NOMBRE}.csv', index=False)
+df.to_csv(f'Punto_1_Base_Limpia_{NOMBRE}.csv', index=False, encoding='utf-8-sig')
+log_mod.to_csv(f'Punto_1_Log_Modificaciones_{NOMBRE}.csv', index=False, encoding='utf-8-sig')
+log_dep.to_csv(f'Punto_1_Log_Depuraciones_{NOMBRE}.csv', index=False, encoding='utf-8-sig')
 
-print("Base limpia:", len(df), "| Modificaciones:", len(log_mod), "| Depuraciones:", len(log_dep))
-print("\nResumen de exclusiones:")
-print(log_dep['RAZON'].value_counts())
+print(f"Base limpia: {len(df)} | Modificaciones: {len(log_mod)} | Depuraciones: {len(log_dep)}\n")
 
+print(">>> RESUMEN DE DEPURACIONES (Reglas de Negocio)")
+display(log_dep['RAZON'].value_counts().rename_axis('RAZON').reset_index(name='REGISTROS'))
 
-#Decimo 
-#En caso de que quisieramos descargar los archivos que estas funciones generan ejecutariamos este codigo 
+print(">>> LOG DE DEPURACIONES (detalle)")
+display(log_dep)
 
-# for f in [f'Punto_1_Base_Limpia_{NOMBRE}.csv',
-#           f'Punto_1_Log_Modificaciones_{NOMBRE}.csv',
-#           f'Punto_1_Log_Depuraciones_{NOMBRE}.csv']:
-#     files.download(f)
+print(">>> LOG DE MODIFICACIONES (muestra de 20)")
+display(log_mod.head(20))
+
+print(">>> BASE LIMPIA (muestra de 10)")
+display(df.head(10))
