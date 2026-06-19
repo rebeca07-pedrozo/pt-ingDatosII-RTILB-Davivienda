@@ -198,3 +198,4 @@ display(log_mod.head(20))
 
 print(">>> BASE LIMPIA (muestra de 10)")
 display(df.head(10))
+
