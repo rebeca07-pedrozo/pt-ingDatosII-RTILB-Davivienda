@@ -199,3 +199,19 @@ display(log_mod.head(20))
 print(">>> BASE LIMPIA (muestra de 10)")
 display(df.head(10))
 
+# Decimo - Auto-validacion 
+print("CUADRE:", len(df_raw), "=", len(df), "limpias +", len(log_dep), "depuradas ->",
+      len(df_raw) == len(df) + len(log_dep))
+
+checks = {
+ 'venc<desemb': (df['FECHA_VENCIMIENTO']<df['FECHA_DESEMBOLSO']).sum(),
+ 'venc<corte': (df['FECHA_VENCIMIENTO']<df['FECHA_CORTE']).sum(),
+ 'desemb futuro': (df['FECHA_DESEMBOLSO']>df['FECHA_CORTE']).sum(),
+ 'saldo>monto': (df['SALDO_MO_CAPITALIZABLE']>df['MONTO_DESEMBOLSADO']).sum(),
+ 'cuotafija+TV': ((df['SISTEMA_PAGO']=='CUOTA_FIJA')&(df['INDICADOR_INDEXACION']=='TV')).sum(),
+ 'bullet!=venc': ((df['SISTEMA_PAGO']=='BULLET')&(df['FRECUENCIA_PAGO_CAPITAL']!='VENCIMIENTO')).sum(),
+ 'tasa>usura': (df['TASA_COMPLETA']>TASA_USURA).sum(),
+ 'plazo_orig nulo/neg': ((df['PLAZO_ORIGINACION'].isna())|(df['PLAZO_ORIGINACION']<0)).sum(),
+}
+for k,v in checks.items():
+    print(f"  {'OK ' if v==0 else '⚠ FALLA'} {k}: {v}")
