@@ -1,0 +1,89 @@
+
+
+**[Diapositiva 1 — Portada] (~25 seg)**
+
+"Buenos días. Mi nombre es Rebeca Pedrozo, y en los próximos diez minutos les voy a presentar mi recomendación para detener el crecimiento de costos sin perder un solo cliente.
+
+A esta presentación le puse un nombre: *El espejismo del costo*. Y lo llamé así porque mi primera conclusión es que el problema que nos trajo aquí no es el que parece. Déjenme mostrarles a qué me refiero."
+
+---
+
+**[Diapositiva 2 — El problema real] (~1 min 20 seg)**
+
+"Cuando uno ve que la factura de la nube sube mes a mes, el instinto es inmediato: 'el problema es el costo, recortémoslo'. Es lógico, es lo que haría cualquiera. Pero ahí está el espejismo.
+
+El costo de la nube no es la enfermedad. Es el síntoma. La enfermedad real está en nuestro modelo comercial, y se resume en una frase: les cobramos a los mil clientes la misma tarifa plana de quinientos dólares, sin importar cuánto consume cada uno. Mientras tanto, el costo de la nube no es plano: crece según el volumen de uso de cada cliente.
+
+¿Ven el desbalance? Tenemos un ingreso que está quieto, amarrado a un costo que crece solo. Por eso, cualquier recorte técnico que hagamos hoy nos va a dar un respiro, pero solo temporal: apenas escalemos, la hemorragia vuelve. Así que mi recomendación no va a perseguir el costo. Va a ir directo a la raíz, que es el modelo."
+
+---
+
+**[Diapositiva 3 — Las 3 opciones] (~1 min 30 seg)**
+
+"El equipo técnico me puso sobre la mesa tres caminos, y los comparé en lo que de verdad importa.
+
+Lo primero que salta a la vista es algo curioso. Si miramos las tres opciones solo desde la plata, son casi idénticas: la A deja un margen mensual de trescientos cincuenta mil dólares, la B trescientos cuarenta mil, y la C trescientos treinta y seis mil. Tres caminos distintos, prácticamente el mismo resultado financiero. Es un empate técnico.
+
+Y eso cambia toda la conversación. Porque si la plata no decide, entonces la decisión está en las otras dos columnas: el tiempo y el riesgo. Ahí es donde estos tres caminos, que parecían iguales, se separan por completo. Una toma tres meses, otra una semana, otra un mes. Una tiene riesgo alto, otra riesgo crítico, otra riesgo bajo. Vamos a recorrerlos."
+
+---
+
+**[Diapositiva 4 — Por qué descarto B] (~1 min 30 seg)**
+
+"Empiezo por descartar la Opción B, y empiezo por ella a propósito, porque es la más tentadora de las tres. Imaginen la escena: alguien entra a la sala y dice 'tengo una solución que sube el margen al ochenta por ciento y la implemento en una sola semana, con un solo ingeniero'. Sobre el papel, suena como la ganadora obvia. Es lo que ven en la punta de este iceberg: rápido, barato, eficiente.
+
+Pero un iceberg es justamente eso: lo peligroso es lo que no se ve, lo que está debajo del agua. Y debajo de la Opción B hay tres cosas que la hunden.
+
+La primera: para lograr ese ahorro, le degradamos el servicio a *todos* los clientes, de cinco a treinta minutos, y lo hacemos sin avisarles. La segunda: eso rompe el Acuerdo de Nivel de Servicio que firmamos con cada uno de ellos. No es un ajuste, es incumplir un contrato. Y la tercera, la consecuencia directa: según la estimación de Ventas, el quince por ciento de los clientes se va de inmediato. Eso son ciento cincuenta cuentas saliéndose por la puerta hacia la competencia, al instante.
+
+Y aquí está mi conclusión, hablando desde el rol de riesgo: romper un SLA a escondidas no es una decisión de ahorro, es un evento de riesgo. Tiene exposición contractual, porque incumplimos lo pactado; tiene exposición reputacional, porque un cliente molesto lo cuenta; y ese quince por ciento puede ser apenas el comienzo si la noticia se corre. Por eso, lo que parecía la opción más barata es en realidad la más cara. La Opción B queda descartada."
+
+---
+
+**[Diapositiva 5 — A vs. C] (~1 min 30 seg)**
+
+"Descartada la B, nos queda el verdadero dilema: la Opción A contra la Opción C. Y aquí voy a ser totalmente transparente con ustedes, porque quiero que vean que no elegí la fácil, sino que evalué las dos con honestidad.
+
+La Opción A es buena. De verdad lo es. Tiene el margen más alto de las tres y, además, conserva los cinco minutos de actualización para todos los clientes. Nadie pierde calidad. Es una opción tentadora, y sería deshonesto de mi parte no reconocerlo.
+
+Pero pierde frente a la C en tres frentes, y los resumo en tres palabras: tiempo, riesgo y raíz.
+
+Tiempo: el mandato de la Junta es detener la hemorragia este trimestre. La Opción A se gasta tres meses enteros con todo el equipo encerrado reescribiendo código, y durante esos tres meses seguimos sangrando al costo viejo y no podemos sacar nada nuevo para vender.
+
+Riesgo: reescribir toda la arquitectura de un solo golpe es un riesgo de ejecución enorme; si algo se retrasa, nos quedamos sin trimestre y sin solución.
+
+Y raíz: aquí está lo de fondo. Aunque la A baja el costo, no toca el modelo. Seguimos regalando el uso intensivo a un precio plano. Es decir, cura el síntoma, pero deja viva la enfermedad. La Opción C, en cambio, ataca esa raíz directamente, se ejecuta en un mes, y le devuelve al cliente el poder de decidir. Por eso mi recomendación es la C."
+
+---
+
+**[Diapositiva 6 — La recomendación: los dos planes] (~1 min 20 seg)**
+
+"¿Y en qué consiste la Opción C? En algo muy simple de explicar: dividimos el servicio en dos planes, y dejamos que sea el cliente quien elija cuál quiere.
+
+El plan Estándar: la información se actualiza cada hora. El cliente paga cuatrocientos dólares, y a nosotros nos cuesta apenas ochenta. El plan Premium: se actualiza cada cinco minutos, exactamente igual que hoy. El cliente paga setecientos, y a nosotros nos sigue costando los mismos trescientos de siempre.
+
+Y aquí está la idea que lo cambia todo: la Opción C es la Opción B, pero bien hecha. ¿Se acuerdan de que la B fallaba porque le quitaba calidad al cliente a la fuerza y a escondidas? Bueno, la C ofrece esa misma velocidad más lenta, pero como una *elección*, no como un castigo. El cliente que no necesita tiempo real elige el plan más barato porque quiere, y hasta paga menos que antes. Y el cliente que sí valora los cinco minutos, los paga, y con eso cubre su propio costo. Proyectamos que el ochenta por ciento se irá al Estándar y el veinte por ciento al Premium. Nadie se siente engañado. Y por eso, nadie se va."
+
+---
+
+**[Diapositiva 7 — El impacto] (~50 seg)**
+
+"¿Y cuál es el resultado de todo esto? Un aumento del sesenta y ocho por ciento en el margen mensual.
+
+Pasamos de doscientos mil a trescientos treinta y seis mil dólares de margen al mes. Con cero pérdida de clientes, porque el modelo es transparente y el cliente elige. Y todo el plan sale a producción en un solo mes; es decir, dentro del trimestre que pidió la Junta. Y hay un beneficio extra: como la C solo toma un mes, los tres ingenieros quedan libres en treinta días para volver a construir funcionalidades que podamos vender. No los perdemos tres meses como habría pasado con la A."
+
+---
+
+**[Diapositiva 8 — Riesgos y visión] (~1 min 10 seg)**
+
+"Ninguna recomendación seria se presenta sin sus riesgos, así que quiero anticipar el principal antes de que me lo pregunten: ¿qué pasa si más del veinte por ciento de los clientes se va al plan Estándar, o peor, se va del todo?
+
+Lo mitigamos con la forma en que lo comunicamos. A este cliente no le estamos quitando nada: le estamos *bajando* el precio, de quinientos a cuatrocientos. Eso se presenta como un beneficio, no como una pérdida. Acompañamos la migración de cada cuenta, y a los clientes más importantes les mantenemos condiciones especiales para asegurarnos de que se queden.
+
+Y quiero cerrar con la visión a futuro, porque esta recomendación no termina en el trimestre. En el siguiente, con los ingenieros ya liberados, podemos tomar la tecnología de la Opción A —esa refactorización que descartamos por lenta— y aplicarla únicamente al grupo Premium. Eso bajaría su costo interno de trescientos a ciento cincuenta dólares, y dispararía aún más la rentabilidad. Así combinamos lo mejor de los dos mundos: primero arreglamos el modelo, y después optimizamos la tecnología, en ese orden."
+
+---
+
+**[Diapositiva 9 — Gracias] (~20 seg)**
+
+"Así que, para cerrar, lo resumo en una sola idea: el problema nunca fue el costo. Era el modelo. La Opción C lo corrige dentro del trimestre, sin perder un solo cliente, y nos deja listos para seguir creciendo. Esa es mi recomendación. Muchas gracias."
